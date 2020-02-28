@@ -1,0 +1,12 @@
+<nav class="navbar is-dark">
+
+    <!-- menu -->
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" [routerLink]="routes.home" routerLinkActive="active"> Home</a>
+            <a class="navbar-item" [routerLink]="routes.login" *ngIf="!isUserLoggedIn" routerLinkActive="active"> Login</a>
+            <a class="navbar-item" (click)="logout()" *ngIf="isUserLoggedIn" routerLinkActive="active"> Logout</a>
+            <a class="navbar-item" [routerLink]="routes.feedback" routerLinkActive="activate"> Feedback</a>
+        </div>
+    </div>
+</nav>

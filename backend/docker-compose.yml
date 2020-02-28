@@ -1,0 +1,55 @@
+version: "3"
+services:
+  users-db:
+    build: ./storage
+    ports:
+      - "3000:5984"
+    networks:
+      - backend
+    environment:
+      - 'COUCHDB_USER=admin'
+      - 'COUCHDB_PASSWORD=admin'
+
+  user:
+    build: ./users
+    ports:
+      - "3090:3090"
+    volumes:
+      - /media/maxime/4c2d5b82-9164-4a2b-9189-3ee0dbc74551/maxime/Documents/ESCAUX/backend/users:/usr/src/user-service
+      - /usr/src/user-service/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - backend
+    restart: on-failure
+    depends_on:
+      - users-db
+
+  feedback-db:
+    build: ./storage
+    ports:
+      - "3001:5984"
+    networks:
+      - backend
+    environment:
+      - 'COUCHDB_USER=admin'
+      - 'COUCHDB_PASSWORD=admin'
+
+  feedback:
+    build: ./feedback
+    ports:
+      - "3091:3091"
+    volumes:
+      - ./feedback:/usr/src/feedback-service
+      - /usr/src/feedback-service/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - backend
+    restart: on-failure
+    depends_on:
+      - feedback-db
+
+networks:
+  backend:
+    driver: overlay

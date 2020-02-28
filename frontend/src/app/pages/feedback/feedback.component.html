@@ -1,0 +1,17 @@
+<button class="btn btn-primary" (click)="fetchUserFeedbacks()"> Only mine feedbacks </button>
+<button class="btn btn-primary" (click)="fetchFeedbacks()"> All feedbacks </button>
+<form [formGroup]="feedbackForm">
+    <div>
+        <label for="rate"> Your rate: </label>
+        <input id="rate" type="text" formControlName="rate">
+    </div>
+    <div>
+        <label for="note"> Your note: </label>
+        <input id="note" type="text" formControlName="note">
+    </div>
+    <button class="btn btn-success" type="submit" (click)="onSubmit(feedbackForm.value)"> Submit </button>
+</form>
+
+<ng-container *ngFor="let feedback of feedbacks">
+    <feedback-item [feedback]="feedback"></feedback-item>
+</ng-container>

@@ -1,0 +1,16 @@
+<h2> Register </h2>
+<hr />
+<br />
+
+<form [formGroup]="registerForm">
+  <div>
+    <label for="username"> Username: </label>
+    <input id="username" type="text" formControlName="username">
+  </div>
+  <div>
+    <label for="password"> Password: </label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+  <button class="btn btn-success" type="submit" (click)="onRegister(registerForm.value)"> Login </button>
+  <button class="btn btn-danger" (click)="return()"> Cancel</button>
+</form>

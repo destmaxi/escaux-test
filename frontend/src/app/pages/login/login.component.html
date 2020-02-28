@@ -1,0 +1,17 @@
+<h2> Login </h2>
+<hr />
+<br />
+
+<form [formGroup]="checkoutForm">
+  <div>
+    <label for="username"> Username: </label>
+    <input id="username" type="text" formControlName="username">
+  </div>
+  <div>
+    <label for="password"> Password: </label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+  <button class="btn btn-success" type="submit" (click)="onLoginSubmit(checkoutForm.value)"> Login </button>
+  <button class="btn btn-danger" (click)="onCancel()"> Cancel</button>
+  <p> Need to <a [routerLink]="registerUrl" routerLinkActive="active"> register</a> ? </p>
+</form>

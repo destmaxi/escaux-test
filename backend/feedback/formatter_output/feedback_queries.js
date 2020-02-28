@@ -1,0 +1,1 @@
+{"views":{"feedbacks":{"map":"function (doc) {\n        if (doc.userID) {\n          /* eslint-disable */\n          emit(doc.userID, doc)\n          /* eslint-enable */\n        }\n      }"},"comments":{"map":"function (doc) {\n        if (doc.comment && doc.vote && doc.feedbackID) {\n          emit(doc._id, doc)\n        }\n      }"}}}
