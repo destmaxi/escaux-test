@@ -13,7 +13,6 @@ RUN npm install axios
 # source files of the authentication service
 ADD gulpfile.js .
 ADD src src
-ADD jsons jsons
 ADD boot-in-order.sh .
 # string to create tokens (see utils/en-de-coders.js)
 ENV TOKEN_SECRET changeme
