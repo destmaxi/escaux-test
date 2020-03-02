@@ -1,16 +1,21 @@
 import {Comment} from "./comment";
+import {Votable} from "./votable";
 
-export class Feedback {
-    constructor(private rate: string, private note: string, private comments: Comment[], private id: string) {
+export class Feedback implements Votable {
+    constructor(private rate: string, private note: string, private comments: Comment[], private id: string, private value: number=0, private username: string) {
 
     }
 
-    addComment(comment: Comment) {
-        this.comments.push(comment)
+    setComments(comments: Comment[]) {
+        this.comments = comments
     }
 
-    getId() {
+    getID() {
         return this.id
+    }
+
+    getUser() {
+        return this.username
     }
 
     getRating() {
@@ -21,7 +26,19 @@ export class Feedback {
         return this.note
     }
 
+    getValue() {
+        return this.value
+    }
+
     getComments() {
         return this.comments
+    }
+
+    upvote() {
+        this.value++
+    }
+
+    downvote() {
+        this.value--
     }
 }

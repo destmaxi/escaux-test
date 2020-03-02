@@ -15,8 +15,8 @@ export class FeedbackPageComponent implements OnInit {
 
     constructor(private feedbackService: FeedbackService, private formBuilder: FormBuilder, private auth: AuthenticationService) {
         this.feedbackForm = this.formBuilder.group({
-            rate: 'Good',
-            note: 'your note'
+            rate: '',
+            note: ''
         })
     }
 
@@ -25,7 +25,7 @@ export class FeedbackPageComponent implements OnInit {
     }
 
     fetchFeedbacks() {
-        this.feedbackService.getFeedbacks().then(feedbacks => {
+        this.feedbackService.getFeedbacks(this.auth.getCurrentUser()).then(feedbacks => {
             this.feedbacks = feedbacks;
         })
     }

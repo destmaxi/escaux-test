@@ -1,2 +1,15 @@
-<div> {{comment.getRate()}} </div>
-<div> {{comment.getComment()}} </div>
+<div class="container-fluid">
+    <div class="panel panel-info">
+        <h6 class="panel-heading"> {{comment.getUser()}} </h6>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <vote [votable]="comment"></vote>
+                    </div>
+                    <div class="col-xs-11"> {{comment.getComment()}} </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

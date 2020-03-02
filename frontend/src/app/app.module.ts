@@ -14,6 +14,8 @@ import {FeedbackPageComponent} from "./pages/feedback/feedback.component";
 import {FeedbackComponent} from "./shared/components/feedback/feedback.component";
 import {FeedbackService} from "./shared/services/feedback.service";
 import {CommentComponent} from "./shared/components/comment/comment.component";
+import {VoteComponent} from "./shared/components/vote/vote.component";
+import {FlashMessagesModule} from 'angular2-flash-messages'
 
 @NgModule({
     imports: [
@@ -21,7 +23,8 @@ import {CommentComponent} from "./shared/components/comment/comment.component";
         RouterModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FlashMessagesModule.forRoot()
     ],
     declarations: [
         HomePageComponent,
@@ -31,12 +34,13 @@ import {CommentComponent} from "./shared/components/comment/comment.component";
         HeaderComponent,
         FeedbackPageComponent,
         FeedbackComponent,
-        CommentComponent
+        CommentComponent,
+        VoteComponent,
     ],
     providers: [
         AuthGuard,
         AuthenticationService,
-        FeedbackService
+        FeedbackService,
     ],
     bootstrap: [AppComponent]
 })

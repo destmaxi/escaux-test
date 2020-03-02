@@ -1,0 +1,12 @@
+.intro-2 {
+    background: url("https://mdbootstrap.com/img/Photos/Others/img (50).jpg")no-repeat center center;
+    background-size: cover;
+    height: 100%;
+}
+.my-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+    text-align: center;
+}

@@ -7,5 +7,6 @@ import {Comment} from "../../data/comment";
 })
 
 export class CommentComponent {
-    @Input() comment: Comment
+    @Input() comment: Comment;
+
 }

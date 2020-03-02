@@ -1,17 +1,43 @@
 <h2> Login </h2>
-<hr />
-<br />
+<hr/>
+<br/>
 
 <form [formGroup]="checkoutForm">
-  <div>
-    <label for="username"> Username: </label>
-    <input id="username" type="text" formControlName="username">
-  </div>
-  <div>
-    <label for="password"> Password: </label>
-    <input id="password" type="password" formControlName="password">
-  </div>
-  <button class="btn btn-success" type="submit" (click)="onLoginSubmit(checkoutForm.value)"> Login </button>
-  <button class="btn btn-danger" (click)="onCancel()"> Cancel</button>
-  <p> Need to <a [routerLink]="registerUrl" routerLinkActive="active"> register</a> ? </p>
+    <div class="container-fluid">
+        <div class="panel panel-success">
+            <div class="panel-heading"><b>Enter your login/password</b></div>
+            <div class="panel-body">
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-2">
+                        <label for="username"> Username: </label>
+                    </div>
+                    <div class="col-md-10">
+                        <input onfocus="this.select()" class="form-control" id="username" type="text" formControlName="username">
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-2">
+                        <label for="password"> Password: </label>
+                    </div>
+                    <div class="col-md-10">
+                        <input onfocus="this.select()" class="form-control" id="password" type="password" formControlName="password">
+                    </div>
+                </div>
+                <div class="col" style="padding-bottom: 10px">
+                    <div class="col-md-1" style="padding-bottom: 10px">
+                        <button class="btn btn-success" type="submit" (click)="onLoginSubmit(checkoutForm.value)"> Login </button>
+                    </div>
+
+                    <div class="col-xs-11" style="padding-bottom: 10px">
+                        <button class="btn btn-danger" (click)="onCancel()"> Cancel</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        Need to <a [routerLink]="registerUrl" routerLinkActive="active"> register</a> ?
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>

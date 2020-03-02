@@ -193,6 +193,105 @@ app.post('/comment', (req, res) => {
     })
 });
 
+/**
+ * API to retrieve a particular comment
+ *
+ * request params:
+ *  - commentID: _
+ *
+ * request query:
+ *  - token: _
+ *
+ *  @param {String} commentID the id of the comment to be retrieved
+ *  @param {String} token the token of the user
+ *
+ *  @returns {Status code} 200 in case of success, 400 in case of invalid request and 500 otherwise
+ *
+ *  @returns in case of success, the comment with id: commentID
+ */
+app.get('/comment/:commentID', (req, res) => {
+   if (!(req.params.hasOwnProperty('commentID') && req.query.hasOwnProperty('token'))) {
+       res.status(400).json({message: 'invalid request'});
+       return
+   }
+
+   const token = req.query.token;
+   const commentID =req.params.commentID;
+   isConnected(token).then(_ => {
+       return db.getComment(commentID).then(comment => {
+           res.status(200).json({comment:comment})
+       }).catch(err => {
+           res.status(500).json({message: err.message})
+       })
+   }).catch(err => {
+       res.status(err.message).json({message: 'permission denied'})
+   })
+});
+
+/**
+ * API to upvote a comment
+ */
+app.put('/upvote', (req, res) => {
+    console.log(req.body);
+    if (!(req.body.hasOwnProperty('token') && req.body.hasOwnProperty('commentID') && req.body.hasOwnProperty('userID'))) {
+        res.status(400).json({message: 'invalid request'});
+        return
+    }
+
+    isConnected(req.body.token).then(_ => {
+        return db.upvote(req.body.userID, req.body.commentID).then(_ => {
+            res.status(200).json({message: 'successfully upvoted'})
+        }).catch(err => {
+            res.status(500).json({message: err.message})
+        })
+    }).catch(err => {
+        res.status(err.message).json({message: 'permission denied'})
+    })
+});
+
+
+/**
+ * API to downvote a comment
+ */
+app.put('/downvote', (req, res) => {
+    if (!(req.body.hasOwnProperty('token') && req.body.hasOwnProperty('commentID') && req.body.hasOwnProperty('userID'))) {
+        res.status(400).json({message: 'invalid request'});
+        return
+    }
+
+    console.log(req.body.userID);
+
+    isConnected(req.body.token).then(_ => {
+        return db.downvote(req.body.userID, req.body.commentID).then(_ => {
+            res.status(200).json({message: 'successfully upvoted'})
+        }).catch(err => {
+            res.status(500).json({message: err.message})
+        })
+    }).catch(err => {
+        res.status(err.message).json({message: 'permission denied'})
+    })
+});
+
+/**
+ * API to retrieve the votes of a give id
+ */
+app.get('/votes/:id', (req, res) => {
+    if (!(req.params.hasOwnProperty('id') && req.query.hasOwnProperty('token'))){
+        res.status(400).json({message: "invalid request"});
+        return
+    }
+
+    isConnected(req.query.token).then (_ => {
+        return db.getVote(req.params.id).then(vote => {
+            res.status(200).json({vote: vote})
+        }).catch(err => {
+            res.status(500).json({message: err.message})
+        })
+    }).catch(err => {
+        res.status(err.message).json({message: err.message})
+    })
+});
+
 app.get('/', (req, res) => {
     return res.status(200).json({status: 'success'})
 });

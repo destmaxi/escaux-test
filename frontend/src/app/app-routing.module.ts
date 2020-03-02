@@ -9,7 +9,7 @@ import {FeedbackPageComponent} from "./pages/feedback/feedback.component";
 
 
 const routes: Routes = [
-    {path: RoutesConfig.routesNames.home, component: HomePageComponent, canActivate: [AuthGuard]},
+    {path: RoutesConfig.routesNames.home, component: HomePageComponent},
     {path: RoutesConfig.routesNames.register, component: RegisterPageComponent},
     {path: RoutesConfig.routesNames.login, component: LoginPageComponent},
     {path: RoutesConfig.routesNames.feedback, component: FeedbackPageComponent, canActivate: [AuthGuard]},

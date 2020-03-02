@@ -1,9 +1,6 @@
-<ng-container>
-  <div class="row">
-    <div class="col-sm-6 offset-sm-3">
-        <!--<app-header title="Home" [isUserLoggedIn]="auth.isLogged()"></app-header> -->
-        <app-header title="Home" [isUserLoggedIn]="auth.isLogged()"></app-header>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</ng-container>
+<app-header title="Home" [isUserLoggedIn]="auth.isLogged()"></app-header>
+<div style="z-index: 999; position: fixed; width: 96%; left: 2%">
+    <flash-messages></flash-messages>
+</div>
+
+<router-outlet></router-outlet>

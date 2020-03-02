@@ -1,15 +1,48 @@
-<button class="btn btn-primary" (click)="fetchUserFeedbacks()"> Only mine feedbacks </button>
-<button class="btn btn-primary" (click)="fetchFeedbacks()"> All feedbacks </button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="padding-bottom: 10px">
+            <button class="btn btn-primary" (click)="fetchUserFeedbacks()"> Only mine feedbacks</button>
+        </div>
+        <div class="col-md-2" style="padding-bottom: 10px">
+            <button class="btn btn-primary" (click)="fetchFeedbacks()"> All feedbacks</button>
+        </div>
+    </div>
+</div>
 <form [formGroup]="feedbackForm">
-    <div>
-        <label for="rate"> Your rate: </label>
-        <input id="rate" type="text" formControlName="rate">
+    <div class="container-fluid">
+        <div class="panel panel-success">
+            <div class="panel-heading"> <b> Write your feedback here </b></div>
+            <div class="panel-body">
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-2">
+                        <label for="rate"> Your rate: </label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="form-control" id="rate" formControlName="rate">
+                            <option> Bad - This application is crap</option>
+                            <option> Bad - The application freezes all the time</option>
+                            <option> Good - (but) I would like to have a reduce loading time</option>
+                            <option> Good - (but) I miss feature XYZ</option>
+                            <option> Very Good - (but) The new version XYZ introduces bug ABC</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-2">
+                        <label for="note"> Your feedback: </label>
+                    </div>
+                    <div class="col-md-10">
+                        <input class="form-control" id="note" type="text" formControlName="note">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <button class="btn btn-success" type="submit" (click)="onSubmit(feedbackForm.value)"> Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="note"> Your note: </label>
-        <input id="note" type="text" formControlName="note">
-    </div>
-    <button class="btn btn-success" type="submit" (click)="onSubmit(feedbackForm.value)"> Submit </button>
 </form>
 
 <ng-container *ngFor="let feedback of feedbacks">

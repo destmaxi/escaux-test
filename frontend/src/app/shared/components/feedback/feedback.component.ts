@@ -17,19 +17,20 @@ export class FeedbackComponent implements OnInit {
 
     constructor(private feedbackService: FeedbackService, private formBuilder: FormBuilder, private auth: AuthenticationService) {
         this.commentForm = this.formBuilder.group({
-            comment: 'Write your comment here',
-            rate: 'Your rate'
+            comment: '',
+            rate: ''
         })
     }
 
     addComment(comment) {
-        this.feedbackService.addComment(this.feedback, new Comment(comment.comment, comment.rate), this.auth.getCurrentUser())
+        this.commentForm.clear;
+        this.feedbackService.addComment(this.feedback, new Comment(comment.comment, 0, null, this.auth.getCurrentUser().getID()), this.auth.getCurrentUser())
             .then(_ => {this.fetchComments()})
     }
 
     fetchComments() {
         this.feedbackService.getComments(this.auth.getCurrentUser(), this.feedback).then(comments => {
-            comments.forEach(comment => this.feedback.addComment(comment));
+            this.feedback.setComments(comments)
         }).catch(err => {
             console.error(err.message)
         })

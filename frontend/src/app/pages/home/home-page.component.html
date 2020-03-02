@@ -1,3 +1,20 @@
-<ng-container>
-    {{_name}}
-</ng-container>
+<div class="intro-2">
+    <div class="my-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <h1><b> Welcome to the feedback application!</b></h1>
+                </div>
+                <div class="row">
+                    <h4>Here you can give your feedback about the application, <br> comment the feedbacks of the other users and rate them.</h4>
+                </div>
+                <div class="row" *ngIf="!auth.isLogged()">
+                    <h2>Please <a href="{{routes.login}}"> sign in</a> or <a href="{{routes.register}}"> register </a> to continue</h2>
+                </div>
+                <div class="row" *ngIf="auth.isLogged()">
+                    <h2> Have fun <b> {{user.getCurrentUser().getID()}} </b> ! </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

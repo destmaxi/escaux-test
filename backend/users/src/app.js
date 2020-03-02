@@ -13,7 +13,7 @@ const db = require('./utils/users');
  *
  * @returns {status code} 200 in case of success, 400 in case of missing params
  *                        and 500 otherwise.
- * @returns {String} the token of the user
+ * @returns {String} in case of success, the user token and id
  */
 app.post('/user', (req, res) => {
   if(!(req.body.hasOwnProperty('username') && req.body.hasOwnProperty('password'))) {
@@ -24,8 +24,8 @@ app.post('/user', (req, res) => {
   const usr = req.body.username;
   const usrPassw = req.body.password;
   return db.createUser(usr, usrPassw)
-    .then((token) => {
-      res.status(200).json({ status: 'success', token })
+    .then(token => {
+      res.status(200).json({ status: 'success', user: {token: token, id: usr}})
     })
     .catch(err => {
       res.status(500).json({ status: 'error', message: String(err) })

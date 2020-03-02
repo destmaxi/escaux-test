@@ -25,8 +25,6 @@ server.use((req, res, next) => {
 
 server.use((err, req, res, next) => {
     const message = req.app.get('env') === 'development' ? err : {};
-    log(`${message}`);
-    log(err);
     res.status(err.status || 500);
     res.json({
         status: 'error'
