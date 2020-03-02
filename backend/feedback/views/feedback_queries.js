@@ -11,17 +11,22 @@ const viewDescriptor = {
     },
     comments: {
       map: function (doc) {
-        if (doc.comment && doc.vote && doc.feedbackID && doc.type) {
-          let vote = doc.type === "downvote" ? -1 : 1;
-          emit(doc.feedbackID, {doc: doc, vote: vote})
+        if (doc.comment && doc.feedbackID) {
+          emit(doc.feedbackID, doc)
+        }
+      }
+    },
+    votes: {
+      map: function (doc) {
+        if ((doc.type === "downvote" || doc.type === "upvote") && doc.commentID) {
+          const vote = doc.type === "downvote" ? -1 : 1;
+          emit(doc.commentID, vote)
         }
       },
-      reduce: function(keys, values) {
-        let sum = values.reduce(function(a, b) {
-          return a.vote + b.vote
+      reduce: function (keys, values, rereduce) {
+        return values.reduce(function(a, b) {
+          return a + b
         });
-
-        return sum
       }
     }
   }
