@@ -9,6 +9,7 @@ WORKDIR /usr/src/frontend-service
 ENV PATH /usr/src/frontend-service/node_modules/.bin:${PATH}
 ADD . .
 RUN npm install
+EXPOSE 80
 # source files of the authentication service
 
 CMD npm start
