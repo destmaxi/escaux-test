@@ -15,7 +15,7 @@ services:
     ports:
       - "3090:3090"
     volumes:
-      - /media/maxime/4c2d5b82-9164-4a2b-9189-3ee0dbc74551/maxime/Documents/ESCAUX/backend/users:/usr/src/user-service
+      - ./users:/usr/src/user-service
       - /usr/src/user-service/node_modules
     environment:
       - NODE_ENV=development
