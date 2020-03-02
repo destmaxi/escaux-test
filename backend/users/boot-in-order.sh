@@ -19,15 +19,13 @@
 #       CREATED: 10/08/2018 09:20
 #      REVISION:  ---
 #===============================================================================
-if [ "${WITH_PERSISTENT_DATA}" != "" ]; then
-  echo "Wait (indefenitly) until the DB creation (name: ${DB_NAME})."
-  echo "The DB URL is: ${DB_URL}"
-  until curl --request PUT ${DB_URL} ; do
-    echo -e "\t DB (${DB_NAME}) wasn't created - trying again later..."
-    sleep 2
-  done
-  echo "DB (${DB_NAME}) was created!"
-fi
+echo "Wait (indefenitly) until the DB creation (name: ${DB_NAME})."
+echo "The DB URL is: ${DB_URL}"
+until curl --request PUT ${DB_URL} ; do
+  echo -e "\t DB (${DB_NAME}) wasn't created - trying again later..."
+  sleep 2
+done
+echo "DB (${DB_NAME}) was created!"
 
 cd jsons
 source fill_db.sh ${DB_URL}
